@@ -99,9 +99,10 @@ async def filter_documents(documents: List[Document], threshold: float = 2) -> F
 @step
 async def index_search(app_state: AppState, question: str, message_history: List[ChatCompletionMessageParam]) -> IndexSearchAction:
     query = await rewrite_query(app_state, question, message_history)
+    search_query = query.rewritten_query or question
     response = await app_state.search_client.search(
-        search_text=query,
-        vector_queries=[VectorizableTextQuery(text=query, k_nearest_neighbors=50, fields="embedding")],
+        search_text=search_query,
+        vector_queries=[VectorizableTextQuery(text=search_query, k_nearest_neighbors=50, fields="embedding")],
         query_type="semantic",
         semantic_configuration_name="default",
         top=10,
