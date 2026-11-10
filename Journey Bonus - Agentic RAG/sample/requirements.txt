@@ -6,4 +6,4 @@ aiohttp
 openai
 chainlit
 python-dotenv
-prompty
+prompty==0.1.50

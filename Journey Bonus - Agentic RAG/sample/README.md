@@ -30,6 +30,10 @@ We used Visual Studio Code with the [Python extension](https://marketplace.visua
 1. Copy `sample.env` to `.env` and fill out all environment variables. You do not need to provide a Search key if you are using [keyless](https://learn.microsoft.com/azure/search/search-security-rbac) authentication, but you must provide an Azure OpenAI key
 1. Run the ingestion script to setup your sample index: `python ingest.py`
 
+The sample uses Prompty 0.1.50 because its prompt preparation returns the chat message format expected by the OpenAI client. Prompty 2.x uses a different message format.
+
+To check that the sample prompts produce compatible chat messages, run `python -m unittest discover -s tests -v` from this directory.
+
 ## Run the code
 
 1. Run the sample app to interact with the sample index: `chainlit run app.py`
